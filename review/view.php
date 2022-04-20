@@ -144,7 +144,14 @@ include "navbar.php";
                         <?php foreach  ($result_comment as $row) {?>
                                 <div class="d-flex mb-4">
                         <div class="d-flex">
-                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+
+                           <?php if (empty($row['password'])) { ?>
+                               <div class="flex-shrink-0"><img class="rounded-circle" width="40" height="40" src="<?php echo $row['image'] ?>" alt="" /></div>
+
+                            <?php } else {  ?>
+                               <div class="flex-shrink-0"><img class="rounded-circle" width="40" height="40" src="../upload/<?php echo $row['image'] ?>" alt=""> </div>
+                            <?php } ?>
+
                             <div class="ms-3">
                                 <div class="fw-bold">  <?php echo $row['firstName'] . " " . $row['lastName']  ?></div>
                                 <?php  echo $row['content_comment'] ?>
@@ -152,7 +159,9 @@ include "navbar.php";
                             </div>
                         </div>
                                 </div>
-                        <?php } ?>
+                        <?php
+                 } ?>
+
                     </div>
                 </div>
             </section>
@@ -179,6 +188,7 @@ include "navbar.php";
                                 <li><a href="#!">Web Design</a></li>
                                 <li><a href="#!">HTML</a></li>
                                 <li><a href="#!">Freebies</a></li>
+
                             </ul>
                         </div>
                         <div class="col-sm-6">
