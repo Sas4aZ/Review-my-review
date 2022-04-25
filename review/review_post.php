@@ -13,9 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (empty($input_review_name)) {
         $review_name_err = "Please enter a name of the review";
         echo "Please enter the name of the review";
-    } elseif (!filter_var($input_review_name, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-zA-Z\s]+$/")))){
-        $review_name_err = "Please enter a valid review name";
-        echo "Please enter a valid review name";
     }else{
         $review_name = $input_review_name;
     }
@@ -114,17 +111,18 @@ $input_foreword = trim($_POST['review_foreword']) ;
 
 
 
-<div class="container">
+<div class="container col-xxl-8 px-4 py-5">
 <form action="" method="post" enctype="multipart/form-data">
     Title of your review: <input type="text" class="form-control" placeholder="Enter title here" name="review_name"> <br>
 A sentence about your review : <input type="text" class="form-control" placeholder="Your Foreword" name="review_foreword">
     Insert your review here:<br> <textarea class="form-control" cols="40" rows="10" name="review_description"></textarea> <br>
 
     <input class="form-control" type="file" id="image" name="photo" >
-    <label for="image">Image of the book/anything related.</label> <br>
+    <label class="mb-3" for="image">Image of the book/anything related.</label> <br>
 
-    <input type="submit" class="btn btn-primary" value="Submit">
+    <input type="submit" class="btn btn-primary mb-4" value="Submit">
 </form>
 </div>
 </body>
+<?php include "footer.php" ?>
 </html>

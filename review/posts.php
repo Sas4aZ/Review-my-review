@@ -20,7 +20,7 @@ include "../includes/reg_header.php"
             <div class="col">
                 <div class="card shadow-sm">
 
-                    <img src="review_image/<?php echo $row['review_image'] ?> " class="bd-placeholder-img card-img-top" width="100%" height="225"   alt="">
+                    <img src="review_image/<?php echo $row['review_image'] ?> " class="bd-placeholder-img card-img-top" width="100%" height="300" style = "object-fit: cover; object-position: 100% 0;" alt="">
 
                     <div class="card-body">
                    <h5 class="card-title"> <?php echo $row['review_name'] ?> </h5>
@@ -38,3 +38,7 @@ include "../includes/reg_header.php"
             </div>
 
 <?php } ?>
+        </div>
+    </div>
+</div>
+            <?php include "footer.php" ?>

@@ -146,10 +146,10 @@ include "navbar.php";
                         <div class="d-flex">
 
                            <?php if (empty($row['password'])) { ?>
-                               <div class="flex-shrink-0"><img class="rounded-circle" width="40" height="40" src="<?php echo $row['image'] ?>" alt="" /></div>
+                               <div class="flex-shrink-0"><img class="rounded-circle" width="40" height="40" style = "object-fit: cover; object-position: 100% 0;" src="<?php echo $row['image'] ?>" alt="" /></div>
 
                             <?php } else {  ?>
-                               <div class="flex-shrink-0"><img class="rounded-circle" width="40" height="40" src="../upload/<?php echo $row['image'] ?>" alt=""> </div>
+                               <div class="flex-shrink-0"><img class="rounded-circle" width="40" style = "object-fit: cover; object-position: 50% 50%;" height="40" src="../upload/<?php echo $row['image'] ?>" alt=""> </div>
                             <?php } ?>
 
                             <div class="ms-3">
