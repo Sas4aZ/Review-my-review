@@ -6,7 +6,9 @@ include "../session.php";
 
     if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
         // Get URL parameter
+
         $id = trim($_GET["id"]);
+        $_SESSION["rvu"] = $id ;
         // Prepare a select statement
         $sql = "SELECT * from review LEFT JOIN users on users.id = review.user_id WHERE review_id = ?; ";
         if ($stmt = mysqli_prepare($conn, $sql)) {
@@ -52,44 +54,6 @@ include "../session.php";
     }
 
 
-if  ($_SERVER['REQUEST_METHOD'] == "POST" ) {
-    $input_comment = trim($_POST["comment"]);
-    if (empty($input_comment)) {
-        $comment_err = "Please enter a comment";
-        echo "Please enter a comment";
-    } else {
-        $comment = $input_comment;
-    }
-
-    if (empty($comment_err)) {
-
-
-// Prepare an insert statement
-        $sql = "INSERT INTO comments (review_id, user_id, content_comment) VALUES (?,?,?)";
-
-        if ($stmt = mysqli_prepare($conn, $sql)) {
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "iis", $review_id, $user_id, $content);
-
-            // Set parameters
-            $review_id = trim($_GET['id']);
-            $user_id = trim($_SESSION['id']);
-            $content = $_POST['comment'];
-
-            // Attempt to execute the prepared statement
-            if (mysqli_stmt_execute($stmt)) {
-                echo "Commnet done";
-            } else {
-                echo "ERROR: Could not execute query: $sql. " . mysqli_error($conn);
-            }
-        } else {
-            echo "ERROR: Could not prepare query: $sql. " . mysqli_error($conn);
-        }
-
-// Close statement
-
-    }
-}
 $sql = "SELECT * from comments LEFT JOIN users on users.id = comments.user_id WHERE review_id =" .$_GET["id"] . "  order by comment_id DESC; " ;
 $result_comment = mysqli_query($conn,$sql ) ;
 
@@ -123,7 +87,7 @@ include "navbar.php";
                 <figure class="mb-4"><img class="img-fluid rounded" src="review_image/<?php echo $image ?> " alt="..." /></figure>
                 <!-- Post content-->
                 <section class="mb-5">
-                    <p class="fs-5 mb-4"> <?php echo $review_description ?> </p>
+                    <p class="fs-5 mb-4"> <?php echo nl2br($review_description);   ?> </p>
 <!--                    <p class="fs-5 mb-4">The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.</p>-->
 <!--                    <p class="fs-5 mb-4">If you get asteroids about a kilometer in size, those are large enough and carry enough energy into our system to disrupt transportation, communication, the food chains, and that can be a really bad day on Earth.</p>-->
 <!--                    <h2 class="fw-bolder mb-4 mt-5">I have odd cosmic thoughts every day</h2>-->
@@ -132,11 +96,12 @@ include "navbar.php";
                 </section>
             </article>
             <!-- Comments section-->
+
             <section class="mb-5">
                 <div class="card bg-light">
                     <div class="card-body">
                         <!-- Comment form-->
-                        <form class="mb-4" action="" method="post">
+                        <form class="mb-4" action="insert_comment.php" method="post">
                             <textarea class="form-control" rows="3" name="comment" placeholder="Join the discussion and leave a comment!"></textarea>
                             <button type="submit" class="btn btn-primary">Submit</button></form>
                         <!-- Comment with nested comments-->
@@ -158,7 +123,27 @@ include "navbar.php";
 
                             </div>
                         </div>
+
+                                    <?php if ( (trim($_SESSION['id'])) == (trim($row['user_id']))) { ?>
+                                    <div class="ms-auto p-2 bd-highlight">
+                                        <div class="dropdown">
+                                            <a class="" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <button type="button" class="btn btn-outline-secondary">
+                                                    <img src="../assets/images/three-dots-vertical.svg" alt="">
+                                                    <span class="visually-hidden">Button</span>
+                                                </button>
+                                            </a>
+
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <li><a class="dropdown-item" href="delete_comment.php?id=<?php echo $row['comment_id']?> ">Delete</a></li>
+                                                <li><a class="dropdown-item" href="edit_comment.php?id=<?php echo $row['comment_id'] ?> ">Edit</a></li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                <?php }?>
                                 </div>
+
                         <?php
                  } ?>
 
