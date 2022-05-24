@@ -102,7 +102,7 @@ $input_foreword = trim($_POST['review_foreword']) ;
 }
 ?>
 
-
+<script src="../assets/js/ckeditor.js"> </script>
 <?php include "../includes/reg_header.php" ?>
 <?php include "navbar.php" ?>
 <body>
@@ -114,8 +114,8 @@ $input_foreword = trim($_POST['review_foreword']) ;
 <div class="container col-xxl-8 px-4 py-5">
 <form action="" method="post" enctype="multipart/form-data">
     Title of your review: <input type="text" class="form-control" placeholder="Enter title here" name="review_name"> <br>
-A sentence about your review : <input type="text" class="form-control" placeholder="Your Foreword" name="review_foreword">
-    Insert your review here:<br> <textarea class="form-control" cols="40" rows="10" name="review_description"></textarea> <br>
+A sentence about your review : <input type="text"  class="form-control" placeholder="Your Foreword" name="review_foreword">
+    Insert your review here:<br> <textarea  class="form-control" cols="40" rows="10" id="editor" name="review_description"></textarea> <br>
 
     <input class="form-control" type="file" id="image" name="photo" >
     <label class="mb-3" for="image">Image of the book/anything related.</label> <br>
@@ -124,5 +124,12 @@ A sentence about your review : <input type="text" class="form-control" placehold
 </form>
 </div>
 </body>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
 <?php include "footer.php" ?>
 </html>

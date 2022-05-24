@@ -86,6 +86,8 @@ include "navbar.php";
                 <!-- Preview image figure-->
                 <figure class="mb-4"><img class="img-fluid rounded" src="review_image/<?php echo $image ?> " alt="..." /></figure>
                 <!-- Post content-->
+
+
                 <section class="mb-5">
                     <p class="fs-5 mb-4"> <?php echo nl2br($review_description);   ?> </p>
 <!--                    <p class="fs-5 mb-4">The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.</p>-->
@@ -136,7 +138,7 @@ include "navbar.php";
 
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                 <li><a class="dropdown-item" href="delete_comment.php?id=<?php echo $row['comment_id']?> ">Delete</a></li>
-                                                <li><a class="dropdown-item" href="edit_comment.php?id=<?php echo $row['comment_id'] ?> ">Edit</a></li>
+
 
                                             </ul>
                                         </div>
@@ -154,38 +156,38 @@ include "navbar.php";
         <!-- Side widgets-->
         <div class="col-lg-4">
             <!-- Search widget-->
-            <div class="card mb-4">
-                <div class="card-header">Search</div>
-                <div class="card-body">
-                    <div class="input-group">
-                        <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                        <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Categories widget-->
-            <div class="card mb-4">
-                <div class="card-header">Categories</div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <ul class="list-unstyled mb-0">
-                                <li><a href="#!">Web Design</a></li>
-                                <li><a href="#!">HTML</a></li>
-                                <li><a href="#!">Freebies</a></li>
-
-                            </ul>
-                        </div>
-                        <div class="col-sm-6">
-                            <ul class="list-unstyled mb-0">
-                                <li><a href="#!">JavaScript</a></li>
-                                <li><a href="#!">CSS</a></li>
-                                <li><a href="#!">Tutorials</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--            <div class="card mb-4">-->
+<!--                <div class="card-header">Search</div>-->
+<!--                <div class="card-body">-->
+<!--                    <div class="input-group">-->
+<!--                        <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />-->
+<!--                        <button class="btn btn-primary" id="button-search" type="button">Go!</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <!-- Categories widget-->-->
+<!--            <div class="card mb-4">-->
+<!--                <div class="card-header">Categories</div>-->
+<!--                <div class="card-body">-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-sm-6">-->
+<!--                            <ul class="list-unstyled mb-0">-->
+<!--                                <li><a href="#!">Web Design</a></li>-->
+<!--                                <li><a href="#!">HTML</a></li>-->
+<!--                                <li><a href="#!">Freebies</a></li>-->
+<!---->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                        <div class="col-sm-6">-->
+<!--                            <ul class="list-unstyled mb-0">-->
+<!--                                <li><a href="#!">JavaScript</a></li>-->
+<!--                                <li><a href="#!">CSS</a></li>-->
+<!--                                <li><a href="#!">Tutorials</a></li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
             <!-- Side widget-->
             <div class="card mb-4">
                 <div class="card-header">Side Widget</div>
@@ -196,6 +198,8 @@ include "navbar.php";
 </div>
 <!-- Footer-->
 <?php include "footer.php" ?>
+
+
 <!-- Bootstrap core JavaScript -->
 <script src="/web/20201011125907js_/https://startbootstrap.github.io/startbootstrap-blog-post/vendor/jquery/jquery.min.js"></script>
 <script src="/web/20201011125907js_/https://startbootstrap.github.io/startbootstrap-blog-post/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
