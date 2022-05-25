@@ -19,7 +19,7 @@ more "coder" feature
 - Validation in all types of input.
 - shows error in validation in form fields and retains data even though server side validation used. 
 - uses bootstrap js and css for design + liveness
-- Comment on code 
+- Most of the code is commented
 
 ## Running the project 
 To run this, its same from all other php based web applications.
