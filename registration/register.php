@@ -147,11 +147,11 @@ $password = trim($_POST['password']);
             move_uploaded_file($_FILES["photo"]["tmp_name"], "../upload/" . $filename);
             // Check whether file exists before uploading it
         } else{
-            echo "Error: There was a problem uploading your file. Please try again.";
+       //     echo "Error: There was a problem uploading your file. Please try again.";
             $file_err = "error";
         }
     } else{
-        echo "Error: " . $_FILES["photo"]["error"];
+     //   echo "Error: " . $_FILES["photo"]["error"];
         $file_err = "error";
     }
 
@@ -203,7 +203,7 @@ $password = trim($_POST['password']);
     <hr>
     <div class="col-12">
     <div class="form-floating mb-3">
-        <input type="text" class="form-control <?php echo $username_err_class ; ?> "  value="<?php echo $username  ?>" id="floatingUsername"  name="username" placeholder="Username">
+        <input type="text" required class="form-control <?php echo $username_err_class ; ?> "  value="<?php echo $username  ?>" id="floatingUsername"  name="username" placeholder="Username">
         <label for="floatingUsername">Username</label>
         <div class="valid-feedback">
             Looks good!
@@ -216,7 +216,7 @@ $password = trim($_POST['password']);
 
     <div class="col-md-6">
         <div class="form-floating mb-3">
-            <input type="text" class="form-control <?php echo $first_name_err_class ; ?>" value="<?php echo $first_name  ?>" name="first_name" id="first_name" placeholder="First Name">
+            <input type="text" required class="form-control <?php echo $first_name_err_class ; ?>" value="<?php echo $first_name  ?>" name="first_name" id="first_name" placeholder="First Name">
             <label for="first_name">First Name</label>
             <div class="valid-feedback">
                 Looks good!
@@ -229,7 +229,7 @@ $password = trim($_POST['password']);
 
     <div class="col-md-6">
         <div class="form-floating mb-3">
-            <input type="text" class="form-control <?php echo $last_name_err_class ; ?>" value="<?php echo $last_name  ?>" name="last_name" id="last_name" placeholder="Last name">
+            <input type="text" required class="form-control <?php echo $last_name_err_class ; ?>" value="<?php echo $last_name  ?>" name="last_name" id="last_name" placeholder="Last name">
             <label for="last_name">Last name</label>
             <div class="valid-feedback">
                 Looks good!
@@ -243,7 +243,7 @@ $password = trim($_POST['password']);
 
     <div class="col-12">
         <div class="form-floating mb-3">
-            <input type="email" class="form-control <?php echo $email_err_class ; ?>" value="<?php echo $email  ?>" id="floatingEmail" name="email" placeholder="name@example.com">
+            <input type="email" required class="form-control <?php echo $email_err_class ; ?>" value="<?php echo $email  ?>" id="floatingEmail" name="email" placeholder="name@example.com">
             <label for="floatingEmail">Email address</label>
             <div class="valid-feedback">
                 Looks good!
@@ -255,7 +255,7 @@ $password = trim($_POST['password']);
     </div>
     <div class="col-md-6">
         <div class="form-floating mb-3">
-            <input type="password" class="form-control <?php echo $password_err_class ; ?>" value="<?php echo $password  ?>" id="floatingPassword" name="password" placeholder="Password">
+            <input type="password" required class="form-control <?php echo $password_err_class ; ?>" value="<?php echo $password  ?>" id="floatingPassword" name="password" placeholder="Password">
             <label for="floatingPassword">Password</label>
             <div class="valid-feedback">
                 Looks good!
@@ -268,7 +268,7 @@ $password = trim($_POST['password']);
     </div>
     <div class="col-md-6">
         <div class="form-floating mb-3">
-            <input type="password" class="form-control <?php echo $password_err_class ; ?>"  value="<?php echo $confirm_password  ?>" id="floatingPassword2" name="confirm_password" placeholder="Re-enter password">
+            <input type="password" required class="form-control <?php echo $password_err_class ; ?>"  value="<?php echo $confirm_password  ?>" id="floatingPassword2" name="confirm_password" placeholder="Re-enter password">
             <label for="floatingPassword2">Re-enter Password</label>
             <div class="valid-feedback">
                 Looks good!
@@ -282,7 +282,7 @@ $password = trim($_POST['password']);
     <div class="col-12">
 
         <div class="form-floating mb-3">
-            <input type="file" class="form-control" name="photo" id="image" value="Insert image">
+            <input type="file" required class="form-control" name="photo" id="image" value="Insert image">
             <label for="image">Insert Image</label>
         </div>
 

@@ -30,6 +30,10 @@ include "../includes/reg_header.php"
                             <div class="btn-group">
                                <a href="view.php?id=<?php echo $row['review_id']?>" > <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
  </a>
+                                <?php  if ($_SESSION['id']== $row["user_id"]) {   ?>
+                                <a href="delete_post.php?id=<?php echo $row['review_id']?>" > <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                                </a>
+                                <?php } ?>
                             </div>
                             <small class="text-muted"><?php echo $row['created']?></small>
                         </div>

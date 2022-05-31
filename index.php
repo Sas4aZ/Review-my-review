@@ -10,21 +10,13 @@ if(isset($_SESSION['email']))
 }
 require_once "config.php";
 
-$email = $password = "";
+$email = $password = $class ="";
 $err = "";
 
 // if request method is post
 if ($_SERVER['REQUEST_METHOD'] == "POST"){
-    if(empty(trim($_POST['email'])) || empty(trim($_POST['password'])))
-    {
-        $err = "Please enter email and password";
-        echo $err;
-    }
-    else{
-        $email = trim($_POST['email']);
-        $password = trim($_POST['password']);
-    }
-
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
 
     if(empty($err))
     {
@@ -34,76 +26,51 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
         $param_email = $email;
 
         // Try to execute this statement
-        if(mysqli_stmt_execute($stmt)){
-            mysqli_stmt_store_result($stmt);
-            if(mysqli_stmt_num_rows($stmt) == 1)
+    }
+    if(mysqli_stmt_execute($stmt)){
+        mysqli_stmt_store_result($stmt);
+        if(mysqli_stmt_num_rows($stmt) == 1)
+        {
+            mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password);
+            if(mysqli_stmt_fetch($stmt))
             {
-                mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password);
-                if(mysqli_stmt_fetch($stmt))
+                if(password_verify($password, $hashed_password))
                 {
-                    if(password_verify($password, $hashed_password))
-                    {
-                        // this means the password is corrct. Allow user to login
-                        session_start();
-                        $_SESSION["email"] = $email;
-                        $_SESSION["id"] = $id;
-                        $_SESSION["loggedin"] = true;
+                    // this means the password is corrct. Allow user to login
+                    session_start();
+                    $_SESSION["email"] = $email;
+                    $_SESSION["id"] = $id;
+                    $_SESSION["loggedin"] = true;
 
-                        //Redirect user to welcome page
-                        header("location: registration/welcome.php");
+                    //Redirect user to welcome page
+                    header("location: registration/welcome.php");
 
-                    } else {
-                        echo "oassword could not be verifies";
-                    }
-                }else  {
-                    echo "could not fetch result";
+                }else {
+                    $err = "Email or password is not valid";
+                    $class = "is-invalid";
+
                 }
+            } else {
+                $err = "Email or password is not valid";
+                $class = "is-invalid";
 
-            }else {
-                echo "no result found";
             }
 
-        } else{
-            echo "could not exec statement";
+        }else {
+            $err = "Email or password is not valid";
+            $class = "is-invalid";
+
         }
+
+    }else {
+        $err = "Email or password is not valid";
+        $class = "is-invalid";
+
     }
-
-
 }
 
 
 ?>
-
-<!--<!doctype html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="utf-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
-<!--    <title>PHP login system!</title>-->
-<!--</head>-->
-<!--<body>-->
-<!---->
-<!--   <h1>Php Login System</h1>-->
-<!--    <a href="register.php">Register</a>-->
-<!--    <a href="login.php">Login</a>-->
-<!---->
-<!---->
-<!--<div class="container mt-4">-->
-<!--    <h3>Please Login Here:</h3>-->
-<!--    <hr>-->
-<!---->
-<!--    <form action="login.php" method="post">-->
-<!--            <label for="email">Username:</label>-->
-<!--            <input type="text" name="email" id="email" placeholder="Enter Username">-->
-<!--            <label for="password">Password:</label>-->
-<!--            <input type="password" name="password" id="password" placeholder="Enter Password">-->
-<!--        <button type="submit" >Submit</button>-->
-<!--    </form>-->
-<!---->
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->
-<!---->
 
 <?php include "includes/reg_header.php" ?>
 
@@ -117,12 +84,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
         <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
+            <input type="email" value="<?php echo  $email?>" required class="form-control <?php echo $class ?>" id="floatingInput" name="email" placeholder="name@example.com">
             <label for="floatingInput">Email address</label>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                <?php echo $err ?>
+            </div>
+        </div>
         </div>
         <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+            <input type="password" class="form-control  <?php echo $class ?>"  required value="<?php echo $password?>" id="floatingPassword" name="password" placeholder="Password">
             <label for="floatingPassword">Password</label>
+
         </div>
 
         <div class="checkbox mb-3">
@@ -157,23 +132,5 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
 </body>
 </html>
-<!--  <body class="text-center">-->
-<!--    <form class="form-signin">-->
-<!--      <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
-<!--      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>-->
-<!--      <label for="inputEmail" class="sr-only">Email address</label>-->
-<!--      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>-->
-<!--      <label for="inputPassword" class="sr-only">Password</label>-->
-<!--      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>-->
-<!--      <div class="checkbox mb-3">-->
-<!--        <label>-->
-<!--          <input type="checkbox" value="remember-me"> Remember me-->
-<!--        </label>-->
-<!--      </div>-->
-<!--      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>-->
-<!--      <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>-->
-<!--    </form>-->
-<!--  --><?php //require "../footer.php"?>
-
 
 
